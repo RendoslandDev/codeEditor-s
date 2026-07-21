@@ -1,12 +1,15 @@
 <template>
-	<section id="blog">
-		<h2 class="heading outline-font">blog</h2>
+	<section
+		id="blog"
+		v-reveal
+	>
+		<h2 class="heading outline-font" v-fill-heading>blog</h2>
 		<div class="posts">
 			<a
 				class="link"
 				href="https://medium.com/@agyapongrendosland53/my-story-is-one-you-may-have-heard-a-few-times-i-went-to-school-to-study-one-thing-started-doing-85e28e9905b6"
 				target="_blank"
-				ref="noopener noreferrer"
+				rel="noopener noreferrer"
 			>
 				<span class="list-number">01. </span>From One Non-Expert to Another - Learning What I Didn't Know I Didn't Know
 			</a>
@@ -14,7 +17,7 @@
 				class="link"
 				href="https://medium.com/@bryn.newell/a-request-to-stop-saying-accessibility-is-hard-7ff0314c3280"
 				target="_blank"
-				ref="noopener noreferrer"
+				rel="noopener noreferrer"
 			>
 				<span class="list-number">02. </span>A Request to Stop Saying Accessibility Is Hard
 			</a>
@@ -32,8 +35,6 @@
 		margin-bottom: 2rem;
 	}
 }
-
-
 
 	.heading {
 		margin-top: 0rem;

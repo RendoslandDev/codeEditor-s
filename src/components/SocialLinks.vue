@@ -3,7 +3,7 @@
 		<a
 			href="https://github.com/RendoslandDev"
 			target="_blank"
-			ref="noopener noreferrer"
+			rel="noopener noreferrer"
 		>
 			<span class="sr-only">Visit my Github</span>
 			<github class="logo" />
@@ -11,7 +11,7 @@
 		<a
 			href="https://bsky.app/profile/rendosland"
 			target="_blank"
-			ref="noopener noreferrer"
+			rel="noopener noreferrer"
 		>
 			<span class="sr-only">Visit my Bluesky</span>
 			<bsky class="logo" />
@@ -19,7 +19,7 @@
 		<a
 			href="https://medium.com/@rendosland"
 			target="_blank"
-			ref="noopener noreferrer"
+			rel="noopener noreferrer"
 		>
 			<span class="sr-only"> Visit my Medium</span>
 			<medium class="logo" />
@@ -27,7 +27,7 @@
 		<a
 			href="https://www.linkedin.com/in/bryn-newell/"
 			target="_blank"
-			ref="noopener noreferrer"
+			rel="noopener noreferrer"
 		>
 			<span class="sr-only"> visit my Linked In</span>
 			<linkedin class="logo" />
@@ -63,6 +63,16 @@ export default {
 	.logo {
 		height: 2rem;
 		fill: white;
+		transition: transform 0.25s ease, opacity 0.25s ease;
+	}
+	a:hover .logo {
+		transform: translateY(-4px) scale(1.1);
+		opacity: 0.85;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.logo {
+			transition: none;
+		}
 	}
 	@media (max-width: $breakpoint-sm) {
 		text-align: left;

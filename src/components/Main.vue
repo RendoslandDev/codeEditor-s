@@ -7,10 +7,13 @@
 		/>
 		<div class="content">
 			<h1 class="header">Rendosland Agyapong<span
+					class="cursor-blink"
+					aria-hidden="true"
+				>|</span><span
 					class="decoration"
 					aria-hidden="true"
 				>—</span></h1>
-			<div class="desc-container">
+			<div class="desc-container glass">
 				<p class="description">Hi there!<br />I'm Rendosland (he/him), a creative developer passionate about creating accessible and beautiful front-end code, curating communities, and moving the needle forward in any environment I can.</p>
 				<SocialLinks />
 			</div>
@@ -18,11 +21,12 @@
 				<a
 					class="link"
 					href="#blog"
-				>blog</a>
+				>blogs</a>
 				<a
 					class="link"
 					href="#projects"
-				>projects</a>
+				>project</a>
+        <a class="link" href="#trials">trial</a>
 				<a
 					class="link"
 					href="#resume"
@@ -46,11 +50,48 @@ export default {
 			bg,
 		};
 	},
+	mounted() {
+		const reduceMotion = window.matchMedia
+			&& window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (reduceMotion) return;
+
+		this._parallax = () => {
+			const y = window.scrollY;
+			const img = this.$el.querySelector('.header-image');
+			if (img) img.style.transform = `translateY(${y * 0.28}px)`;
+			if (window.innerWidth >= 768) {
+				this.$el.style.backgroundPositionY = `calc(center + ${y * 0.18}px)`;
+			}
+		};
+		window.addEventListener('scroll', this._parallax, { passive: true });
+	},
+	beforeDestroy() {
+		if (this._parallax) window.removeEventListener('scroll', this._parallax);
+	},
 };
 </script>
 
 <style lang="scss">
 // Note to self - this is the only file that is mobile first breakpoints
+@keyframes hero-in {
+	from {
+		opacity: 0;
+		transform: translateY(24px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.main .content .header,
+	.main .content .desc-container,
+	.main .content .site-sections {
+		animation: none;
+	}
+}
+
 .main {
 	background: linear-gradient(#e0a6a4, $light-pink);
 	color: #fff;
@@ -77,6 +118,19 @@ export default {
 		padding-top: 5vh;
 		flex-wrap: wrap;
 
+		// Hero entrance: each block fades up in sequence on load.
+		.header,
+		.desc-container,
+		.site-sections {
+			animation: hero-in 0.8s ease both;
+		}
+		.desc-container {
+			animation-delay: 0.15s;
+		}
+		.site-sections {
+			animation-delay: 0.3s;
+		}
+
 		.header {
 			font-family: "le murmure";
 			margin: 0;
@@ -92,11 +146,13 @@ export default {
 			align-items: flex-start;
 			display: flex;
 			flex-direction: column;
+			padding: 1.5rem 1.75rem;
+			gap: 1rem;
 
 			.description {
 				font-size: 1rem;
 				text-align: left;
-				margin-top: 1rem;
+				margin-top: 0;
 			}
 		}
 
@@ -112,9 +168,30 @@ export default {
 			.link,
 			.link:visited {
 				color: #fff;
+				position: relative;
 			}
 			.link:not(:last-child) {
 				margin-right: 5%;
+			}
+
+			// Animated underline wipe on hover
+			.link::after {
+				content: '';
+				position: absolute;
+				bottom: -3px;
+				left: 0;
+				width: 100%;
+				height: 2px;
+				background: #fff;
+				transform: scaleX(0);
+				transform-origin: left center;
+				transition: transform 0.3s ease;
+			}
+			.link:hover {
+				text-decoration: none;
+			}
+			.link:hover::after {
+				transform: scaleX(1);
 			}
 		}
 	}

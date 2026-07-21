@@ -4,6 +4,8 @@
     <About />
     <Blog />
     <Projects />
+    <Hobby/>
+    <Trial/>
     <Resume />
     <Footer />
   </div>
@@ -14,8 +16,11 @@ import Main from '@/components/Main.vue';
 import About from '@/components/About.vue';
 import Blog from '@/components/Blog.vue';
 import Projects from '@/components/Projects.vue';
+import Hobby from '@/components/Hobby.vue';
+import Trial from '@/components/Trial.vue';
 import Resume from '@/components/Resume.vue';
 import Footer from '@/components/Footer.vue';
+
 
 export default {
 	name: 'App',
@@ -24,6 +29,8 @@ export default {
 		About,
 		Blog,
 		Projects,
+		Hobby,
+    Trial,
 		Resume,
 		Footer,
 	},

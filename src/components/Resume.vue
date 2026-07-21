@@ -1,10 +1,13 @@
 <template>
-	<section id="resume">
-		<h2 class="heading outline-font">resume<br class="sm-only" />/cv</h2>
+	<section
+		id="resume"
+		v-reveal
+	>
+		<h2 class="heading outline-font" v-fill-heading>resume<br class="sm-only" />/cv</h2>
 		<a
 			:href="Resume"
 			target="_blank"
-			class="download-button link"
+			class="download-button link pulse-border"
 			download
 		>DOWNLOAD THE PDF</a>
 	</section>

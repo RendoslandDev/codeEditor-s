@@ -1,23 +1,20 @@
 <template>
-	<section class="about-me">
+	<section
+		class="about-me"
+		v-reveal
+	>
 		<img
 			:src="headshot"
 			alt="headshot of Rendosland"
 			class="headshot"
 		/>
 		<div class="about-text">
-			<h2 class="heading outline-font">about me<span
+			<h2 class="heading outline-font" v-fill-heading>about me<span
 					class="decoration"
 					aria-hidden="true"
 				>—</span></h2>
-			<p class="description"> I am a Full Stack Developer with a strong commitment to web accessibility, user-centered design, and the creation of inclusive digital experiences. My work focuses on developing accessible, well-designed solutions that enhance usability for all users while maintaining high standards of functionality and visual quality.
-
-I approach every project with professionalism, collaboration, and a results-oriented mindset. I value teamwork, positive communication, and leading through example, contributing to environments where colleagues and stakeholders can work effectively toward shared objectives.
-
-Based in Colorado, I have extensive experience working remotely and collaborating with distributed teams across different locations. Outside of my professional work, I have a keen interest in travel, motorcycling, yoga, and reading.
-
-I am currently employed full-time as a Full Stack Developer and am also available for freelance engagements. Whether developing new applications from the ground up or auditing, modernizing, and improving existing systems, I am committed to delivering high-quality, accessible, and maintainable solutions.
-<a
+			<p class="description"><span v-fill-text>A modern portfolio and personal branding platform for a professional model, designed to showcase photography, collaborations, and achievements through a responsive, visually engaging experience. Focused on optimized image galleries, intuitive navigation, and effectively highlighting the client's personal brand for agencies and potential clients.</span>
+				<a
 					href="mailto:agyapongrendosland53@gmail.com"
 					class="link rosegold"
 				>get in touch!</a>
