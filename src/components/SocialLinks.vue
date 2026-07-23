@@ -25,7 +25,7 @@
 			<medium class="logo" />
 		</a>
 		<a
-			href="https://www.linkedin.com/in/bryn-newell/"
+			href="https://www.linkedin.com/in//"
 			target="_blank"
 			rel="noopener noreferrer"
 		>

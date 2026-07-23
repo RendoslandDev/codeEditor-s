@@ -1,188 +1,332 @@
 <template>
+	<section id="trials">
+		<div class="intro">
+			<div class="intro-text">
+				<h2 class="heading outline-font" v-fill-heading>Rust🦦 </h2>
+				<p class="subheading">systems experiments, one crate at a time.</p>
+			</div>
 
-  <section id="trials" >
-    <h2 class="heading outline-font" v-fill-heading>Rust -- </h2>
-    <div class="rusty">
-        
-    <span class="outline-font heading" v-fill-heading>Stay-Tuned</span>
-    </div>
-  
-    <div class="trial" v-for="(trial, index) in trials" :key="index" v-reveal="index"
-      >
-      <span class="outline-font black trial-number">0{{ index + 1 }}</span>
-			<h3 class="title">{{ trial.title }}</h3>
-			<p class="date">{{ trial.date }}</p>
-			<p
-				class="description"
-				v-fill-text
-				v-html="trial.description"
-			></p>
-      	<a
-				v-if="trial.link"
-				:href="trial.link"
-				class="trial-link link"
-				target="_blank"
-				rel="noopener noreferrer"
-			>see the work<span
-					class="decoration"
-					aria-hidden="true"
-				>—</span></a>
-      </div>
-  </section>
-  
+			<div class="badge">
+				<div class="badge-photo"></div>
+				<span class="badge-text outline-font" v-fill-heading>Stay&nbsp;Tuned</span>
+			</div>
+		</div>
+
+		<div class="log">
+			<div
+				class="trial"
+				v-for="(trial, index) in trials"
+				:key="index"
+				v-reveal="index"
+			>
+				<div class="trial-index">
+					<span class="outline-font black trial-number">{{ String(index + 1).padStart(2, '0') }}</span>
+					<span class="trial-status" :class="trial.status">{{ trial.status || 'in progress' }}</span>
+				</div>
+
+				<div class="trial-body">
+					<div class="trial-top">
+						<h3 class="title">{{ trial.title }}</h3>
+						<p class="date">{{ trial.date }}</p>
+					</div>
+
+					<p
+						class="description"
+						v-fill-text
+						v-html="trial.description"
+					></p>
+
+					<ul class="tools" v-if="trial.tools && trial.tools.length">
+						<li v-for="(tool, i) in trial.tools" :key="i">{{ tool }}</li>
+					</ul>
+
+					<a
+						v-if="trial.link"
+						:href="trial.link"
+						class="trial-link link"
+						target="_blank"
+						rel="noopener noreferrer"
+					>see the work<span class="decoration" aria-hidden="true">—</span></a>
+				</div>
+			</div>
+		</div>
+	</section>
 </template>
 
-
 <script>
-  export default {
-    dat() {
-      return {
-        projects: [
-          {
-  					title: "corn-sms",
-  					date: "2026",
-  					description:"using rust to create an end to end messaging",
-          },
-          {
-  					title: "corn-sms",
-  					date: "2026",
-  					description:"using rust to create an end to end messaging",
-          }
-        ]
-      }
-    }
-  }
+export default {
+	data() {
+		return {
+			trials: [
+				{
+					title: "corn-sms",
+					date: "2026",
+					description: "using rust to create an end to end messaging",
+					tools: ["Rust", "Tokio"],
+					status: "in progress",
+				},
+			],
+		};
+	},
+};
 </script>
 
-
-
 <style lang="scss">
-  #trials{
+#trials {
 	padding-inline: 5%;
 	margin-top: 12rem;
-	.heading {
-		text-align: left;
-		margin-left: 10%;
-		margin-top: 0;
-  	}
-  }
-	.trial {
-		justify-content: start;
-		display: grid;
-		grid-template-columns: 2fr 4fr 1fr;
-		grid-template-rows: auto auto auto;
-		gap: 1rem 0;
-		max-width: 1000px;
+
+	// intro row: heading + circular photo badge
+	.intro {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 3rem;
+		max-width: 1100px;
 		margin: 0 auto 6rem auto;
-		text-align: left;
-		transition: transform 0.3s ease;
-		border-radius: 6px;
-		padding: 1rem 0;
+		flex-wrap: wrap;
+
+		.intro-text {
+			flex: 1 1 320px;
+
+			.heading {
+				text-align: left;
+				margin: 0;
+				line-height: 0.9;
+			}
+
+			.subheading {
+				margin: 1rem 0 0 0;
+				font-family: monospace;
+				font-size: $step--1;
+				letter-spacing: 0.04em;
+				opacity: 0.6;
+				text-transform: lowercase;
+			}
+		}
+
+		.badge {
+			position: relative;
+			flex: 0 0 auto;
+			width: 220px;
+			height: 220px;
+			border-radius: 50%;
+			border: 1px solid black;
+			background: url("@/assets/rendos.png") no-repeat center / cover;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transform: rotate(-6deg);
+			transition: transform 0.4s ease;
+
+			&:hover {
+				transform: rotate(0deg) scale(1.03);
+			}
+
+			.badge-photo {
+				position: absolute;
+				inset: 0;
+				border-radius: 50%;
+				background: rgba(0, 0, 0, 0.45);
+			}
+
+			.badge-text {
+				position: relative;
+				z-index: 1;
+				color: #fff;
+				font-size: $step-1;
+				text-align: center;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+			}
+		}
+	}
+
+	// trial log
+	.log {
+		max-width: 1000px;
+		margin: 0 auto;
+		border-top: 1px solid rgba(0, 0, 0, 0.15);
+	}
+
+	.trial {
+		display: flex;
+		gap: 2.5rem;
+		padding: 2.5rem 0;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+		transition: transform 0.3s ease, opacity 0.3s ease;
 
 		&:hover {
-			transform: translateY(-6px);
-		}
+			transform: translateX(6px);
 
-		.trial-number {
-			align-self: center;
-			font-size: $step-7;
-			grid-row: 1 / span 5  ;
-			margin: 0 6rem 0 3rem;
-		}
-
-		.title {
-			font-size: $step-3;
-			font-family: "Le Murmure";
-			margin: 0;
-			max-width: 220px;
-		}
-
-		.date {
-			align-self: center;
-			justify-self: end;
-			margin: 0;
-			white-space: nowrap;
-		}
-
-		.description {
-			max-width: 700px;
-			margin: 0;
-		}
-
-  .rusty{
-  .header-image {
-		height: 25vh;
-		mask: linear-gradient(to bottom, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0));
-		object-fit: cover;
-		object-position: 0 45%;
-		position: absolute;
-		top: 0;
-		width: 100%;
-	}
-  
-  }
-  
- 	@media (max-width: $breakpoint-md) {
-		.heading {
-			margin-left: 0;
-			text-align: center;
-		}
-		.trial {
-			.project-number {
-				align-self: flex-start;
-				grid-row: 1 / span 2;
-				margin: 0 1rem 0 1rem;
+			.trial-number {
+				opacity: 1;
 			}
-			.description {
-				grid-column: 2;
-				max-width: 300px;
-			}
-			.trial-link {
-				grid-column: 2;
-			}
-		}}
-  @media (min-width: $breakpoint-md) {
-		background: url("@/assets/rendos.png");
-		background-repeat: no-repeat;
-		background-position: center;
-    border-radius:50%;
-		background-size: cover;
-		height: 450px;
-    width:400px;
-	  border:1px solid black;
-
-		.header-image,
-		.image-fade {
-			display: none;
 		}
-	}
-	@media (max-width: $breakpoint-sm) {
-		margin-top: 5rem;
-		.trial {
-			grid-template-columns: 1fr 2fr 1fr;
-			.trail-number {
-				grid-column: 1;
-				grid-row: 1;
-				line-height: 6rem;
+
+		.trial-index {
+			flex: 0 0 auto;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.75rem;
+			width: 90px;
+
+			.trial-number {
+				font-size: $step-6;
+				line-height: 1;
+				opacity: 0.5;
+				transition: opacity 0.3s ease;
+			}
+
+			.trial-status {
+				font-family: monospace;
+				font-size: 0.7rem;
+				letter-spacing: 0.05em;
+				text-transform: uppercase;
+				padding: 0.25rem 0.6rem;
+				border: 1px solid currentColor;
+				border-radius: 999px;
+				white-space: nowrap;
+				opacity: 0.7;
+
+				&.shipped {
+					color: #2e7d32;
+				}
+				&.in.progress,
+				&.in-progress {
+					color: $rose-gold;
+				}
+			}
+		}
+
+		.trial-body {
+			flex: 1 1 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0.75rem;
+
+			.trial-top {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 1rem;
+				flex-wrap: wrap;
+			}
+
+			.title {
+				font-size: $step-3;
+				font-family: "Le Murmure";
 				margin: 0;
 			}
-			.title {
-				grid-column: 2 / span 2;
-			}
+
 			.date {
-				justify-self: start;
-				grid-column: 1 / span 2;
-				grid-row: 2;
-				padding-bottom: 0;
+				margin: 0;
+				font-family: monospace;
+				font-size: $step--1;
+				opacity: 0.5;
+				white-space: nowrap;
 			}
+
 			.description {
-				grid-column: 1 / span 2;
-				max-width: 100%;
+				max-width: 620px;
+				margin: 0;
+				opacity: 0.85;
 			}
-		
-	
+
+			.tools {
+				list-style: none;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem 1rem;
+				margin: 0.25rem 0 0 0;
+				padding: 0;
+				font-family: monospace;
+
+				li {
+					font-size: $step--1;
+					opacity: 0.6;
+
+					&::before {
+						content: "$ ";
+						opacity: 0.5;
+					}
+				}
+			}
+
 			.trial-link {
-				grid-column: 1 / span 2;
+				margin-top: 0.25rem;
+				align-self: flex-start;
+				font-size: $step-2;
+				color: $rose-gold;
+				font-family: "le murmure";
+
+				.decoration {
+					position: absolute;
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-md) {
+		.intro {
+			justify-content: center;
+			text-align: center;
+
+			.intro-text {
+				flex: 1 1 100%;
+
+				.heading {
+					text-align: center;
+				}
+			}
+
+			.badge {
+				width: 180px;
+				height: 180px;
+			}
+		}
+
+		.trial {
+			gap: 1.5rem;
+
+			.trial-index {
+				width: 64px;
+
+				.trial-number {
+					font-size: $step-4;
+				}
+
+				.trial-status {
+					font-size: 0.6rem;
+					padding: 0.2rem 0.5rem;
+					text-align: center;
+				}
+			}
+		}
+	}
+
+	@media (max-width: $breakpoint-sm) {
+		margin-top: 5rem;
+
+		.intro {
+			gap: 2rem;
+			margin-bottom: 3rem;
+		}
+
+		.trial {
+			flex-direction: column;
+			gap: 1rem;
+
+			.trial-index {
+				flex-direction: row;
+				align-items: center;
+				width: auto;
+			}
+
+			.trial-body .trial-top {
+				flex-direction: column;
+				gap: 0.25rem;
 			}
 		}
 	}

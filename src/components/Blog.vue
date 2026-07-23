@@ -3,7 +3,7 @@
 		id="blog"
 		v-reveal
 	>
-		<h2 class="heading outline-font" v-fill-heading>blog</h2>
+		<h2 class="heading outline-font" v-fill-heading>blog 🦜 </h2>
 		<div class="posts">
 			<a
 				class="link"
