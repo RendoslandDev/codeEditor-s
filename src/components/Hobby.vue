@@ -70,7 +70,7 @@ export default {
 					date: "2025",
 					description: "",
 					tools: ["Flutter"],
-					link: "https://github.com/RendoslandDev/osland",
+					link: "https://github.com/RendoslandDev/osland-mobile",
 					images: [
 						"/osland-1.png",
 						"/osland-2.png",

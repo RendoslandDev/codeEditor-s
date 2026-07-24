@@ -81,8 +81,8 @@ export default {
 					link: "https://github.com/RendoslandDev/ibhmodel",
 					domain: "ibhmodel.com",
 					images: [
-						"/projects/ibh-model-1.png",
-						"/projects/ibh-model-2.png",
+						// "/projects/ibh-model-1.png",
+						// "/projects/ibh-model-2.png",
 					],
 				},
 				{
@@ -93,8 +93,8 @@ export default {
 					link: "https://github.com/RendoslandDev/Devloot",
 					domain: "devloot.com",
 					images: [
-						"/projects/devloots-1.png",
-						"/projects/devloots-2.png",
+						"/devloot-1.png",
+						"/devloot-2.png",
 					],
 				},
 				{
@@ -155,7 +155,7 @@ export default {
 					description:
 						"Software has learned to ask for too much. Osland asks for a folder. Everything else — the accounts, the sync prompts, the telemetry — has been taken out until only the work remains.",
 					tools: ["Electron", "React", "Code Mirror"],
-					link: "https://github.com/RendoslandDev/osland",
+					link: "https://github.com/RendoslandDev/strovex",
 					domain: "strovex.app",
 					images: [
 						"/strovex-1.png",
@@ -171,8 +171,7 @@ export default {
 					link: "https://github.com/RendoslandDev/rendo-guides",
 					domain: "rendo-guides.app",
 					images: [
-						"/projects/rendo-guides-1.png",
-						"/projects/rendo-guides-2.png",
+						"/rendo-guides-1.png",
 					],
 				},
 			],

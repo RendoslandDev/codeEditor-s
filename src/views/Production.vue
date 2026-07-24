@@ -65,7 +65,7 @@ export default {
 		return {
 			works: [
 				{
-					title: "PLACEHOLDER WORK",
+					title: "Vlog - PODCAST",
 					date: "2026",
 					description: "description of this independent release.",
 					tools: [],

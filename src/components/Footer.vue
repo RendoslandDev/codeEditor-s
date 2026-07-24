@@ -3,7 +3,7 @@
 		class="footer"
 		:class="{sticky}"
 	>
-		<div class="rendosland">
+		<div class="rend">
 			<div>Agyapong Rendosland<span
 					class="decoration"
 					aria-hidden="true"
@@ -12,11 +12,12 @@
 		</div>
 
         <div class="block">
-<SocialLinks />
+       <SocialLinks />
 		<p class="rendosland">design by<span
 					class="decoration"
 					aria-hidden="true"
-				>—</span> <a
+				>—</span>
+      <a
 				class="link"
 				href=""
 				target="_blank"
@@ -56,6 +57,7 @@ export default {
 		font-size: 2rem;
 		grid-row: 1 / span 2;
 		text-align: left;
+  justify-self:end;
 	}
 	.year {
 		font-family: Avenir;
@@ -69,6 +71,14 @@ export default {
 			justify-content: center;
 		}
 	}
+  .rend{
+ align-items: center;
+		display: flex;
+		font-family: "le murmure";
+		font-size: 2rem;
+		grid-row: 1 / span 2;
+		text-align: left;
+  }
 	.logo path {
 		fill: black;
 	}

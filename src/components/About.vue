@@ -8,6 +8,7 @@
 			alt="headshot of Rendosland"
 			class="headshot"
 		/>
+    
 		<div class="about-text">
 			<h2 class="heading outline-font" v-fill-heading>about me 🦦<span
 					class="decoration"

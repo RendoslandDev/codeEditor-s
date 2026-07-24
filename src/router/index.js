@@ -1,11 +1,8 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import Merchant from '@/views/Merchant.vue';
 import Home from '@/views/Home.vue';
 import BlogPage from '@/views/BlogPage.vue';
 import Production from '@/views/Production.vue';
-
-Vue.use(VueRouter);
 
 const routes = [
 	{
@@ -13,24 +10,31 @@ const routes = [
 		name: 'home',
 		component: Home,
 	},
-  { path: '/blog', name: 'blog', component: BlogPage },
+	{ path: '/blog', name: 'blog', component: BlogPage },
 	{
 		path: '/production',
 		name: 'production',
 		component: Production,
 	},
-  {
-    path:'/merchant',
-    name:'merchant',
-    component:Merchant,
-  }
+	{
+		path: '/merchant',
+		name: 'merchant',
+		component: Merchant,
+		children: [
+			{ path: 'books', name: 'merchant-books', component: () => import('@/views/merchant/Books.vue') },
+			{ path: 'shoes', name: 'merchant-shoes', component: () => import('@/views/merchant/Shoes.vue') },
+			{ path: 'sneakers', name: 'merchant-sneakers', component: () => import('@/views/merchant/Sneakers.vue') },
+			{ path: 'models/upcoming', name: 'merchant-models-upcoming', component: () => import('@/views/merchant/ModelsUpcoming.vue') },
+			{ path: 'models/registered', name: 'merchant-models-registered', component: () => import('@/views/merchant/ModelsRegistered.vue') },
+		],
+	},
 ];
 
-const router = new VueRouter({
-	mode: 'history',
+const router = createRouter({
+	history: createWebHistory(),
 	routes,
 	scrollBehavior() {
-		return { x: 0, y: 0 };
+		return { top: 0 };
 	},
 });
 

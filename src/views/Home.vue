@@ -22,6 +22,7 @@
 		<Hobby />
 		<Trial />
 		<Resume />
+    <Contact/>
 	</div>
 </template>
 
@@ -33,6 +34,7 @@ import Projects from '@/components/Projects.vue';
 import Hobby from '@/components/Hobby.vue';
 import Trial from '@/components/Trial.vue';
 import Resume from '@/components/Resume.vue';
+import Contact from '@/components/Contact.vue';
 
 export default {
 	name: 'Home',
@@ -44,6 +46,7 @@ export default {
 		Hobby,
 		Trial,
 		Resume,
+    Contact,
 	},
 };
 </script>

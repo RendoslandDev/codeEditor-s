@@ -1,15 +1,14 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 
-
-Vue.config.productionTip = false;
+const app = createApp(App);
 
 // Scroll-reveal: fades/slides an element into view the first time it
 // intersects the viewport. Falls back to "always visible" when the browser
 // lacks IntersectionObserver or the user prefers reduced motion.
-Vue.directive('reveal', {
-	inserted(el, binding) {
+app.directive('reveal', {
+	mounted(el, binding) {
 		const reduceMotion = window.matchMedia
 			&& window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -43,8 +42,8 @@ Vue.directive('reveal', {
 // custom property (0% -> 100%); the actual paint happens in `_styles.scss`.
 const fillHandlers = new WeakMap();
 
-Vue.directive('fill-text', {
-	inserted(el) {
+app.directive('fill-text', {
+	mounted(el) {
 		el.classList.add('fill-text');
 
 		const reduceMotion = window.matchMedia
@@ -80,7 +79,7 @@ Vue.directive('fill-text', {
 		fillHandlers.set(el, onScroll);
 		update();
 	},
-	unbind(el) {
+	unmounted(el) {
 		const handler = fillHandlers.get(el);
 		if (handler) {
 			window.removeEventListener('scroll', handler);
@@ -93,8 +92,8 @@ Vue.directive('fill-text', {
 // Scroll-fill for headings: sweeps a mask from top to bottom as the heading
 // travels up through the viewport, revealing the full outline-font heading.
 // Uses mask-image (not background-clip) so it works alongside -webkit-text-fill-color.
-Vue.directive('fill-heading', {
-	inserted(el) {
+app.directive('fill-heading', {
+	mounted(el) {
 		el.classList.add('fill-heading');
 
 		const reduceMotion = window.matchMedia
@@ -130,7 +129,7 @@ Vue.directive('fill-heading', {
 		fillHandlers.set(el, onScroll);
 		update();
 	},
-	unbind(el) {
+	unmounted(el) {
 		const handler = fillHandlers.get(el);
 		if (handler) {
 			window.removeEventListener('scroll', handler);
@@ -142,8 +141,8 @@ Vue.directive('fill-heading', {
 
 // Scroll-reveal from left: fades/slides an element in from the left side
 // the first time it enters the viewport. Used for section headings.
-Vue.directive('reveal-left', {
-	inserted(el, binding) {
+app.directive('reveal-left', {
+	mounted(el, binding) {
 		const reduceMotion = window.matchMedia
 			&& window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -171,7 +170,5 @@ Vue.directive('reveal-left', {
 	},
 });
 
-new Vue({
-	router,
-	render: (h) => h(App),
-}).$mount('#app');
+app.use(router);
+app.mount('#app');
